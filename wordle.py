@@ -43,9 +43,9 @@ def validate_word(word):
 
 class Wordle:
 
-    def __init__(self, word=None):
-        if word:
-            self.daily_word = word.upper()
+    def __init__(self, daily_word=None):
+        if daily_word:
+            self.daily_word = daily_word.upper()
         else:
             self.daily_word = random.choice(WORD_CORPUS)
         self.result = None
@@ -79,6 +79,7 @@ class Wordle:
 
     def play(self):
 
+        print("----------- WORDLE -----------")
         trial = 1
 
         while trial <= MAX_TRIALS:
