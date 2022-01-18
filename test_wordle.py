@@ -6,7 +6,6 @@ import wordle
 
 class WordleGameTest(unittest.TestCase):
 
-
     @patch('wordle.input', return_value='PROXY')
     def test_winning_streak(self, input):
         w = wordle.Wordle("PROXY")

@@ -31,6 +31,12 @@ def is_word_valid(word):
 
 def validate_word(word):
     """Validates the user guesses.
+
+    Args;
+        word: Guess word entered by an User.
+
+    Returns:
+        is_valid flag and error message if any.
     """
     error_msg = None
     if len(word) != WORD_LENGTH:
@@ -110,7 +116,7 @@ if __name__ == '__main__':
 
 """
 Assumptions
-- For this program, considered 5 letter word corpus of 10 word as of now.
+- For this program, considered 5 letter word corpus of 10 words as of now.
 - For each code run, one word is chosen randomly from the word corpus.
 - Significance of the colors given to the letters of a guessed word
     - Green - Letter is in right spot of the word
@@ -118,18 +124,18 @@ Assumptions
     - WHITE - Letter is not in the word.
 
 Input Validations
-- don't allow spaces..it should be of 5 chars.. use isalpha and len
+- not allowing spaces
+-word should be of 5 chars
 - check if the word is a valid english word
 
-Make below Checks for each letters if word is valid english work
+Make below Checks for each letters if word is valid english word
 - if it's at right spot
 - if it's present in the word
 - Otherwise its not valid choice..
-
-Print the output with a colored letters in caps form
+and then print the output with a colored letters in caps form
 
 Test cases
     - Guessing the Correct word
-    - Guessing Somehow close word 
-    - Invalid word..
+    - Guessing Somehow close word
+    - Invalid and valid word checks
 """
