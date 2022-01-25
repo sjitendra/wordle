@@ -57,18 +57,40 @@ class Wordle:
         self.result = None
 
     def check(self, word):
+        """Checks the guess with the daily word and
+        assigns colors to the letters of the entered word.
+        Also concludes the result.
+
+        Args:
+            word: User entered guess input.
+        """
         output = list()
         correct_spot_count = 0
+        color_choices = dict()  # To maintain color choice of each letter
+        daily_word_letter_freq = dict()
+
+        # Calculating Letter frequencies in the daily word
+        for char in self.daily_word:
+            daily_word_letter_freq[char] = daily_word_letter_freq.get(char, 0) + 1
 
         for i, char in enumerate(word):
-            color = Fore.WHITE
             if char == self.daily_word[i]:
-                color = Fore.GREEN
                 correct_spot_count += 1
-            elif char in self.daily_word:
-                color = Fore.YELLOW
+                color_choices[i] = Fore.GREEN
+                daily_word_letter_freq[char] -= 1
+            elif char not in self.daily_word:
+                color_choices[i] = Fore.WHITE
 
-            output.append((color, char))
+        for i, char in enumerate(word):
+            if i not in color_choices:
+                if daily_word_letter_freq[char]:
+                    color_choices[i] = Fore.YELLOW
+                    daily_word_letter_freq[char] -= 1
+                else:
+                    color_choices[i] = Fore.WHITE
+
+        for i, char in enumerate(word):
+            output.append((color_choices[i], char))
 
         self.result = correct_spot_count == len(word)
         return output
@@ -119,23 +141,23 @@ Assumptions
 - For this program, considered 5 letter word corpus of 10 words as of now.
 - For each code run, one word is chosen randomly from the word corpus.
 - Significance of the colors given to the letters of a guessed word
-    - Green - Letter is in right spot of the word
+    - GREEN - Letter is in right spot of the word
     - YELLOW - Letter is in the word but not in right spot
     - WHITE - Letter is not in the word.
 
 Input Validations
 - not allowing spaces
--word should be of 5 chars
+- word should be of 5 chars
 - check if the word is a valid english word
 
-Make below Checks for each letters if word is valid english word
+Make below checks for each letters if the guess is valid english word
 - if it's at right spot
 - if it's present in the word
-- Otherwise its not valid choice..
+- Otherwise its not valid choice.
 and then print the output with a colored letters in caps form
 
 Test cases
     - Guessing the Correct word
-    - Guessing Somehow close word
+    - Guessing the somehow close word
     - Invalid and valid word checks
 """
